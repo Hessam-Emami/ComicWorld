@@ -12,7 +12,7 @@
         </shape>
     </item>
 
-    <item  android:gravity="end|right" android:left="300dp"
+    <item  android:gravity="end|right" android:left="320dp"
         >
         <shape android:shape="rectangle">
             <corners android:topLeftRadius="100dp"
