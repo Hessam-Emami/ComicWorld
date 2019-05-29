@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "53476386650",
+    "firebase_url": "https://comicworld-69a43.firebaseio.com",
+    "project_id": "comicworld-69a43",
+    "storage_bucket": "comicworld-69a43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53476386650:android:d0d4c68aefc66724",
+        "android_client_info": {
+          "package_name": "com.emami.android.comicworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53476386650-94m0gshjsucflpjnjkc17d1pit2i6jj1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.emami.android.comicworld",
+            "certificate_hash": "c438fe1c1c624e29f5421b3f14c64bcf489b614a"
+          }
+        },
+        {
+          "client_id": "53476386650-pc7sj7pcqbi6og3t76jo59elk2vfrri1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOJlx4YjYkvFSuLlSXS2tCu1CSTVINnVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53476386650-pc7sj7pcqbi6og3t76jo59elk2vfrri1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
