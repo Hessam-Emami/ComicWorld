@@ -70,5 +70,29 @@ class MainActivity : AppCompatActivity() {
                 sliderView.setAdapter(BannerSliderAdapter(list))
             }
         })
+        val adapter = MyAdapter()
+//        binding.newRecyclerView.layoutManager = LinearLayoutManager(this,)
+        binding.newRecyclerView.adapter = adapter
+
+        val ref2 = database.getReference("Comic")
+
+        ref2.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Log.d("MainActivity",p0.message)
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val list:List<Comic> = p0.children.map {
+                    Comic(it.child("Name").value as String,it.child("Image").value as String)
+
+                 }
+                adapter.data = list
+
+            }
+
+        })
+
+
     }
 }
