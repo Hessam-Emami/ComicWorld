@@ -1,4 +1,4 @@
-package com.emami.android.comicworld
+package com.emami.android.comicworld.service
 
 import android.widget.ImageView
 import com.squareup.picasso.Picasso

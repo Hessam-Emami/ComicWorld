@@ -1,4 +1,4 @@
-package com.emami.android.comicworld
+package com.emami.android.comicworld.data
 
 data class Banner(val src: String)
 

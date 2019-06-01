@@ -1,18 +1,15 @@
-package com.emami.android.comicworld
+package com.emami.android.comicworld.ui
 
-import android.graphics.Outline
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.view.ViewOutlineProvider
-import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.emami.android.comicworld.R
+import com.emami.android.comicworld.data.Comic
 import com.emami.android.comicworld.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.emami.android.comicworld.service.PicassoImageService
+import com.emami.android.comicworld.ui.explore.adapter.BannerSliderAdapter
+import com.emami.android.comicworld.ui.explore.adapter.ExploreListAdapter
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -42,7 +39,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(
+            this,
+            R.layout.activity_main
+        )
 //        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 //
 //        textMessage = findViewById(R.id.textww)
@@ -70,8 +70,7 @@ class MainActivity : AppCompatActivity() {
                 sliderView.setAdapter(BannerSliderAdapter(list))
             }
         })
-        val adapter = MyAdapter()
-//        binding.newRecyclerView.layoutManager = LinearLayoutManager(this,)
+        val adapter = ExploreListAdapter()
         binding.newRecyclerView.adapter = adapter
 
         val ref2 = database.getReference("Comic")
@@ -84,10 +83,13 @@ class MainActivity : AppCompatActivity() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 val list:List<Comic> = p0.children.map {
-                    Comic(it.child("Name").value as String,it.child("Image").value as String)
+                    Comic(
+                        it.child("Name").value as String,
+                        it.child("Image").value as String
+                    )
 
                  }
-                adapter.data = list
+                adapter.submitList(list)
 
             }
 

@@ -1,4 +1,4 @@
-package com.emami.android.comicworld
+package com.emami.android.comicworld.ui.explore.adapter
 
 import ss.com.bannerslider.adapters.SliderAdapter
 import ss.com.bannerslider.viewholder.ImageSlideViewHolder
