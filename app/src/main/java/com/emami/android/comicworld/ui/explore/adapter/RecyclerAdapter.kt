@@ -19,9 +19,10 @@ class ExploreListAdapter :
     }
 
 
-    class ViewHolder(val binding: RecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: RecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Comic) {
             binding.comic = item
+            binding.executePendingBindings()
         }
 
         companion object {

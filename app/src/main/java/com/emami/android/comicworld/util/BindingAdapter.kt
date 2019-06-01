@@ -5,6 +5,9 @@ import android.view.View
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.emami.android.comicworld.data.Comic
+import com.emami.android.comicworld.ui.explore.adapter.ExploreListAdapter
 import com.squareup.picasso.Picasso
 import ss.com.bannerslider.Slider
 
@@ -25,4 +28,11 @@ fun Slider.clipImageViewCorners(enabled: Boolean) {
 @BindingAdapter("bannerSrc")
 fun ImageView.loadComicBanner(imgSrc: String) {
     Picasso.get().load(imgSrc).into(this)
+}
+
+
+@BindingAdapter("recyclerList")
+fun RecyclerView.arecyclerList(data: List<Comic>?) {
+    val adapter = this.adapter as ExploreListAdapter
+    adapter.submitList(data)
 }
