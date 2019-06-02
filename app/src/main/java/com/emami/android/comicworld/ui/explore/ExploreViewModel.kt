@@ -12,7 +12,7 @@ import com.google.firebase.database.ValueEventListener
 
 class ExploreViewModel : ViewModel() {
     // TODO: Implement the ViewModel
-    val database = FirebaseDatabase.getInstance()
+    private val database = FirebaseDatabase.getInstance()
 
     private val _bannerList = MutableLiveData<List<String>>()
     val bannerList: LiveData<List<String>>
