@@ -35,7 +35,6 @@ class ExploreFragment : Fragment() {
 
         Slider.init(PicassoImageService())
         val sliderView: Slider = binding.bannerSlider
-
         viewModel.bannerList.observe(this, Observer {
             sliderView.setAdapter(BannerSliderAdapter(it))
         })
