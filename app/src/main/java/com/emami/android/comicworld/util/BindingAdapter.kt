@@ -32,7 +32,7 @@ fun ImageView.loadComicBanner(imgSrc: String) {
 
 
 @BindingAdapter("recyclerList")
-fun RecyclerView.arecyclerList(data: List<Comic>?) {
+fun RecyclerView.setData(data: List<Comic>?) {
     val adapter = this.adapter as ExploreListAdapter
     adapter.submitList(data)
 }

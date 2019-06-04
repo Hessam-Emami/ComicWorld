@@ -11,7 +11,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class ExploreViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
     private val database = FirebaseDatabase.getInstance()
 
     private val _bannerList = MutableLiveData<List<String>>()
@@ -22,10 +21,21 @@ class ExploreViewModel : ViewModel() {
     val comicList: LiveData<List<Comic>>
         get() = _comicList
 
+    private val _navigateToSelectedComic = MutableLiveData<Comic>()
+    val navigateToSelectedComic: LiveData<Comic>
+        get() = _navigateToSelectedComic
 
     init {
         loadBanners()
         loadTrendingComics()
+    }
+
+     fun displayComicDetails(comic: Comic){
+        _navigateToSelectedComic.value = comic
+    }
+
+     fun displayComicDetailsCompleted(){
+        _navigateToSelectedComic.value = null
     }
 
     private fun loadBanners() {

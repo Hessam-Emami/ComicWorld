@@ -1,6 +1,7 @@
 package com.emami.android.comicworld.ui.explore.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -8,14 +9,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.emami.android.comicworld.data.Comic
 import com.emami.android.comicworld.databinding.RecyclerItemBinding
 
-class ExploreListAdapter :
+class ExploreListAdapter(val onClickListener: OnClickListener) :
     ListAdapter<Comic, ExploreListAdapter.ViewHolder>(DiffUtilCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val comic = getItem(position)
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(comic)
+        }
+        holder.bind(comic)
     }
 
 
@@ -41,4 +46,8 @@ class DiffUtilCallback() : DiffUtil.ItemCallback<Comic>() {
 
     override fun areContentsTheSame(oldItem: Comic, newItem: Comic): Boolean =
         oldItem == newItem
+}
+
+class OnClickListener(val mclickListener: (comic: Comic) -> Unit){
+    fun onClick(comic: Comic) = mclickListener(comic)
 }

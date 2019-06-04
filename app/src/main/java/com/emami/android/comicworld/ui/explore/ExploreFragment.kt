@@ -7,15 +7,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavArgs
+import androidx.navigation.NavArgument
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.emami.android.comicworld.databinding.FragmentExploreBinding
 import com.emami.android.comicworld.service.PicassoImageService
 import com.emami.android.comicworld.ui.explore.adapter.BannerSliderAdapter
 import com.emami.android.comicworld.ui.explore.adapter.ExploreListAdapter
+import com.emami.android.comicworld.ui.explore.adapter.OnClickListener
 import ss.com.bannerslider.Slider
 
 class ExploreFragment : Fragment() {
     private lateinit var binding: FragmentExploreBinding
     private lateinit var viewModel: ExploreViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +39,21 @@ class ExploreFragment : Fragment() {
         viewModel.bannerList.observe(this, Observer {
             sliderView.setAdapter(BannerSliderAdapter(it))
         })
-        binding.newRecyclerView.adapter = ExploreListAdapter()
+
+        binding.newRecyclerView.adapter = ExploreListAdapter(OnClickListener {
+            viewModel.displayComicDetails(it)
+        })
+        binding.secRecyclerView.adapter = ExploreListAdapter(OnClickListener {
+            viewModel.displayComicDetails(it)
+        })
+
+        viewModel.navigateToSelectedComic.observe(this, Observer {
+            if (it != null) {
+                findNavController().navigate(ExploreFragmentDirections.actionExploreFragmentToDetailFragment2(it))
+                viewModel.displayComicDetailsCompleted()
+            }
+            })
+
         return binding.root
     }
 
