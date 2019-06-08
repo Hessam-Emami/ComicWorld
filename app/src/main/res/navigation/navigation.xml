@@ -18,8 +18,8 @@
             android:id="@+id/action_exploreFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
         <action
-            android:id="@+id/action_exploreFragment_to_detailFragment2"
-            app:destination="@id/detailFragment" />
+            android:id="@+id/action_exploreFragment_to_pagerFragment"
+            app:destination="@id/pagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/libraryFragment"
@@ -33,11 +33,25 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="comic"
-            app:argType="com.emami.android.comicworld.data.Comic" />
+            app:argType="com.emami.android.comicworld.data.NetworkComic" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.emami.android.comicworld.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/chapterFragment"
+        android:name="com.emami.android.comicworld.ui.chapter.ChapterFragment"
+        android:label="fragment_chapter"
+        tools:layout="@layout/fragment_chapter" />
+    <fragment
+        android:id="@+id/pagerFragment"
+        android:name="com.emami.android.comicworld.ui.PagerFragment"
+        android:label="fragment_pager"
+        tools:layout="@layout/fragment_pager" >
+        <argument
+            android:name="comic"
+            app:argType="com.emami.android.comicworld.data.NetworkComic" />
+    </fragment>
 </navigation>

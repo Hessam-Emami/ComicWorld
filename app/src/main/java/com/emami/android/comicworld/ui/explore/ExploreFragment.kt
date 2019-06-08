@@ -38,7 +38,6 @@ class ExploreFragment : Fragment() {
         viewModel.bannerList.observe(this, Observer {
             sliderView.setAdapter(BannerSliderAdapter(it))
         })
-
         binding.newRecyclerView.adapter = ExploreListAdapter(OnClickListener {
             viewModel.displayComicDetails(it)
         })
@@ -48,7 +47,7 @@ class ExploreFragment : Fragment() {
 
         viewModel.navigateToSelectedComic.observe(this, Observer {
             if (it != null) {
-                findNavController().navigate(ExploreFragmentDirections.actionExploreFragmentToDetailFragment2(it))
+                findNavController().navigate(ExploreFragmentDirections.actionExploreFragmentToPagerFragment(it))
                 viewModel.displayComicDetailsCompleted()
             }
             })

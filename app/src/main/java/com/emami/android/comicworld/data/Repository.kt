@@ -1,18 +1,15 @@
 package com.emami.android.comicworld.data
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 class Repository {
     private val database = FirebaseDatabase.getInstance()
 
     val banners = MutableLiveData<List<String>>()
     val comics = MutableLiveData<List<Comic>>()
+    lateinit var lis : List<NetworkComic>
 
     fun refreshData(){
         loadBanners()
@@ -44,12 +41,9 @@ class Repository {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                val list: List<Comic> = p0.children.map {
-                    Comic(
-                        it.child("Name").value as String,
-                        it.child("Image").value as String
-                    )
-                }
+               val list= p0.children.map { it.getValue(NetworkComic::class.java) }
+                    .map { it!!.asComic() }
+                lis = p0.children.map { it.getValue(NetworkComic::class.java)!! }
                 comics.value = list
             }
 

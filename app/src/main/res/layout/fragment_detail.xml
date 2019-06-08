@@ -1,14 +1,152 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/comicName"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+    <data>
 
-</FrameLayout>
+        <variable
+            name="comic"
+            type="com.emami.android.comicworld.data.NetworkComic" />
+
+        <variable
+            name="viewModel"
+            type="com.emami.android.comicworld.ui.detail.DetailViewModel" />
+    </data>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/comicDescription"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginEnd="32dp"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="@{comic.Description}"
+                            android:textAlignment="center"
+                            android:textSize="17sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+                        <TextView
+                            android:id="@+id/comicName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="32dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="@{comic.Name}"
+                            android:textSize="30sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.496"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/comicYear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="32dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Year :"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toTopOf="@+id/textView2"
+                            app:layout_constraintStart_toStartOf="@+id/textView5"
+                            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="40dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="N.issues :"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toTopOf="@+id/comicYear"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/comicName" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="32dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Category :"
+                            android:textSize="18sp"
+                            app:layout_constraintBottom_toTopOf="@+id/view"
+                            app:layout_constraintStart_toStartOf="@+id/comicYear"
+                            app:layout_constraintTop_toBottomOf="@+id/comicYear" />
+
+                        <TextView
+                            android:id="@+id/comicYearNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="TextView"
+                            android:textSize="18sp"
+                            app:layout_constraintBaseline_toBaselineOf="@+id/comicYear"
+                            app:layout_constraintStart_toStartOf="@+id/comicIssueNum"
+                            tools:text="2014" />
+
+                        <TextView
+                            android:id="@+id/comicCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="@{comic.Category}"
+                            android:textSize="18sp"
+                            app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+                            app:layout_constraintStart_toStartOf="@+id/comicYearNum"
+                            tools:text="Hessam King" />
+
+                        <TextView
+                            android:id="@+id/comicIssueNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="TextView"
+                            android:textSize="18sp"
+                            app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/textView5"
+                            tools:text="8" />
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="24dp"
+                            android:background="@drawable/background_line"
+                            app:layout_constraintEnd_toEndOf="@+id/comicDescription"
+                            app:layout_constraintStart_toStartOf="@+id/comicDescription"
+                            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+</layout>

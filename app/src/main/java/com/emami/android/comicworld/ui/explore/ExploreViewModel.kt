@@ -5,7 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.emami.android.comicworld.data.Comic
+import com.emami.android.comicworld.data.NetworkComic
 import com.emami.android.comicworld.data.Repository
+import com.emami.android.comicworld.data.asComic
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -13,8 +15,6 @@ import com.google.firebase.database.ValueEventListener
 
 class ExploreViewModel : ViewModel() {
     private val repository = Repository()
-     val t1 = repository.banners
-     val t2 = repository.comics
 
     val bannerList: LiveData<List<String>>
         get() = repository.banners
@@ -22,8 +22,8 @@ class ExploreViewModel : ViewModel() {
     val comicList: LiveData<List<Comic>>
         get() = repository.comics
 
-    private val _navigateToSelectedComic = MutableLiveData<Comic>()
-    val navigateToSelectedComic: LiveData<Comic>
+    private val _navigateToSelectedComic = MutableLiveData<NetworkComic>()
+    val navigateToSelectedComic: LiveData<NetworkComic>
         get() = _navigateToSelectedComic
 
     init {
@@ -31,7 +31,10 @@ class ExploreViewModel : ViewModel() {
     }
 
      fun displayComicDetails(comic: Comic){
-        _navigateToSelectedComic.value = comic
+         val name = comic.name
+         val com = repository.lis.find { it.Name == name }
+         Log.d("COMIC", com.toString())
+        _navigateToSelectedComic.value = com!!
     }
 
      fun displayComicDetailsCompleted(){

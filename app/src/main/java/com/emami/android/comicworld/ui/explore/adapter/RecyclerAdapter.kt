@@ -40,7 +40,7 @@ class ExploreListAdapter(val onClickListener: OnClickListener) :
     }
 }
 
-class DiffUtilCallback() : DiffUtil.ItemCallback<Comic>() {
+class DiffUtilCallback : DiffUtil.ItemCallback<Comic>() {
     override fun areItemsTheSame(oldItem: Comic, newItem: Comic): Boolean =
         oldItem.name == newItem.name
 

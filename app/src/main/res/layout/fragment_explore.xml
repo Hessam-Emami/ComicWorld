@@ -30,6 +30,7 @@
             android:background="#FAFAFA ">
 
             <LinearLayout
+                android:id="@+id/searchButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
@@ -89,7 +90,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView3"
                     app:recyclerList="@{viewModel.comicList}"
                     tools:listitem="@layout/recycler_item" />
-
                 <ss.com.bannerslider.Slider
                     android:id="@+id/bannerSlider"
                     android:layout_width="match_parent"
