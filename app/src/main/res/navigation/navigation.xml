@@ -32,8 +32,8 @@
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
-            android:name="comic"
-            app:argType="com.emami.android.comicworld.data.NetworkComic" />
+            android:name="comicDTO"
+            app:argType="com.emami.android.comicworld.data.ComicDTO" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -47,11 +47,11 @@
         tools:layout="@layout/fragment_chapter" />
     <fragment
         android:id="@+id/pagerFragment"
-        android:name="com.emami.android.comicworld.ui.PagerFragment"
+        android:name="com.emami.android.comicworld.ui.pager.PagerFragment"
         android:label="fragment_pager"
         tools:layout="@layout/fragment_pager" >
         <argument
-            android:name="comic"
-            app:argType="com.emami.android.comicworld.data.NetworkComic" />
+            android:name="comicDTO"
+            app:argType="com.emami.android.comicworld.data.ComicDTO" />
     </fragment>
 </navigation>

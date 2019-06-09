@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="comic"
-            type="com.emami.android.comicworld.data.Comic" />
+            name="comicDTO"
+            type="com.emami.android.comicworld.data.ComicPreview" />
     </data>
 <LinearLayout android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,7 +23,7 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="0.85"
-    app:bannerSrc="@{comic.imgSource}" />
+    app:bannerSrc="@{comicDTO.imgSource}" />
     <TextView
         android:layout_gravity="bottom|center_horizontal"
         android:textSize="18sp"
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="0.15"
-        android:text="@{comic.name}"
+        android:text="@{comicDTO.name}"
         android:layout_marginBottom="8dp"
         tools:text="Batman who Laughs"/>
 </LinearLayout>

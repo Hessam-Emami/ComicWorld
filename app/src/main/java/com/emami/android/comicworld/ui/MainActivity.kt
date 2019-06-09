@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
             if(destination.id == R.id.pagerFragment){
                 navView.visibility = View.GONE
-                Toast.makeText(this,"SAASD",Toast.LENGTH_LONG).show()
             }
             else {
                 navView.visibility = View.VISIBLE

@@ -6,7 +6,7 @@ import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.emami.android.comicworld.data.Comic
+import com.emami.android.comicworld.data.ComicPreview
 import com.emami.android.comicworld.ui.explore.adapter.ExploreListAdapter
 import com.squareup.picasso.Picasso
 import ss.com.bannerslider.Slider
@@ -32,7 +32,7 @@ fun ImageView.loadComicBanner(imgSrc: String) {
 
 
 @BindingAdapter("recyclerList")
-fun RecyclerView.setData(data: List<Comic>?) {
+fun RecyclerView.setData(data: List<ComicPreview>?) {
     val adapter = this.adapter as ExploreListAdapter
     adapter.submitList(data)
 }

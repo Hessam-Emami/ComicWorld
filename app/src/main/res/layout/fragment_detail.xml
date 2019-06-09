@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="comic"
-            type="com.emami.android.comicworld.data.NetworkComic" />
+            name="comicDTO"
+            type="com.emami.android.comicworld.data.ComicDTO" />
 
         <variable
             name="viewModel"
@@ -38,7 +38,7 @@
                             android:layout_marginEnd="32dp"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="@{comic.Description}"
+                            android:text="@{comicDTO.Description}"
                             android:textAlignment="center"
                             android:textSize="17sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -54,7 +54,7 @@
                             android:layout_marginTop="32dp"
                             android:layout_marginEnd="8dp"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="@{comic.Name}"
+                            android:text="@{comicDTO.Name}"
                             android:textSize="30sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.496"
@@ -103,7 +103,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="TextView"
+                            android:text="@{comicDTO.year}"
                             android:textSize="18sp"
                             app:layout_constraintBaseline_toBaselineOf="@+id/comicYear"
                             app:layout_constraintStart_toStartOf="@+id/comicIssueNum"
@@ -114,7 +114,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="@{comic.Category}"
+                            android:text="@{comicDTO.Category}"
                             android:textSize="18sp"
                             app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
                             app:layout_constraintStart_toStartOf="@+id/comicYearNum"
@@ -125,7 +125,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-condensed-medium"
-                            android:text="TextView"
+                            android:text="@{comicDTO.chapters.size()"
                             android:textSize="18sp"
                             app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
                             app:layout_constraintEnd_toEndOf="parent"

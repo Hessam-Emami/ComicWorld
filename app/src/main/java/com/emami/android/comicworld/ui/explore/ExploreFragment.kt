@@ -7,11 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.NavArgs
-import androidx.navigation.NavArgument
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.emami.android.comicworld.databinding.FragmentExploreBinding
 import com.emami.android.comicworld.service.PicassoImageService
 import com.emami.android.comicworld.ui.explore.adapter.BannerSliderAdapter
@@ -45,7 +41,7 @@ class ExploreFragment : Fragment() {
             viewModel.displayComicDetails(it)
         })
 
-        viewModel.navigateToSelectedComic.observe(this, Observer {
+        viewModel.navigateToSelectedComicDTO.observe(this, Observer {
             if (it != null) {
                 findNavController().navigate(ExploreFragmentDirections.actionExploreFragmentToPagerFragment(it))
                 viewModel.displayComicDetailsCompleted()

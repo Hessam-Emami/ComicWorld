@@ -1,24 +1,24 @@
 package com.emami.android.comicworld.data
 
 import android.os.Parcelable
-import com.google.firebase.database.PropertyName
 import kotlinx.android.parcel.Parcelize
 
 
 @Parcelize
-data class Comic(val name:String, val imgSource: String) : Parcelable
+data class ComicDTO(val name: String? = "",
+                    val image: String? = "",
+                    val category: String? = "",
+                    val year: String? = "",
+                    val description: String? = "",
+                    val chapters: List<Chapter>? = null) : Parcelable
 
 @Parcelize
-data class NetworkComic(val Name: String? = "",
-                        val Image: String? = "",
-                        val Category: String? = "",
-                        val Description: String? = "",
-                        val Chapters: List<Chapter>? = null) : Parcelable
+data class ComicPreview(val name:String, val imgSource: String) : Parcelable
 
 @Parcelize
-data class Chapter(val Links: List<String>? = listOf(),
-                   val Name: String? = "") : Parcelable
+data class Chapter(val links: List<String>? = listOf(),
+                   val name: String? = "") : Parcelable
 
-fun NetworkComic.asComic(): Comic{
-    return Comic(name = this.Name!!, imgSource = this.Image!!)
+fun ComicDTO.asComic(): ComicPreview{
+    return ComicPreview(name = this.name!!, imgSource = this.image!!)
 }

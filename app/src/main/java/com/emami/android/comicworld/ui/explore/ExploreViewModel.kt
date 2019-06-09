@@ -4,14 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.emami.android.comicworld.data.Comic
-import com.emami.android.comicworld.data.NetworkComic
+import com.emami.android.comicworld.data.ComicPreview
+import com.emami.android.comicworld.data.ComicDTO
 import com.emami.android.comicworld.data.Repository
-import com.emami.android.comicworld.data.asComic
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 class ExploreViewModel : ViewModel() {
     private val repository = Repository()
@@ -19,20 +14,20 @@ class ExploreViewModel : ViewModel() {
     val bannerList: LiveData<List<String>>
         get() = repository.banners
 
-    val comicList: LiveData<List<Comic>>
+    val comicList: LiveData<List<ComicPreview>>
         get() = repository.comics
 
-    private val _navigateToSelectedComic = MutableLiveData<NetworkComic>()
-    val navigateToSelectedComic: LiveData<NetworkComic>
+    private val _navigateToSelectedComic = MutableLiveData<ComicDTO>()
+    val navigateToSelectedComicDTO: LiveData<ComicDTO>
         get() = _navigateToSelectedComic
 
     init {
         repository.refreshData()
     }
 
-     fun displayComicDetails(comic: Comic){
-         val name = comic.name
-         val com = repository.lis.find { it.Name == name }
+     fun displayComicDetails(comicPreview: ComicPreview){
+         val name = comicPreview.name
+         val com = repository.lis.find { it.name == name }
          Log.d("COMIC", com.toString())
         _navigateToSelectedComic.value = com!!
     }
