@@ -4,35 +4,37 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.emami.android.comicworld.databinding.FragmentExploreBinding
-import com.emami.android.comicworld.service.PicassoImageService
-import com.emami.android.comicworld.ui.explore.adapter.BannerSliderAdapter
 import com.emami.android.comicworld.ui.explore.adapter.ExploreListAdapter
 import com.emami.android.comicworld.ui.explore.adapter.OnClickListener
-import ss.com.bannerslider.Slider
+import dagger.android.support.DaggerFragment
+import timber.log.Timber
+import javax.inject.Inject
 
-class ExploreFragment : Fragment() {
+class ExploreFragment : DaggerFragment() {
     private lateinit var binding: FragmentExploreBinding
     private lateinit var viewModel: ExploreViewModel
-
+    @Inject
+    lateinit var factory: ViewModelProvider.Factory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProviders.of(this).get(ExploreViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, factory).get(ExploreViewModel::class.java)
         binding = FragmentExploreBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        Slider.init(PicassoImageService())
-        val sliderView: Slider = binding.bannerSlider
+//        Slider.init(PicassoImageService())
+//        val sliderView: Slider = binding.bannerSlider
         viewModel.bannerList.observe(this, Observer {
-            sliderView.setAdapter(BannerSliderAdapter(it))
+            //            sliderView.setAdapter(BannerSliderAdapter(it))
+            Timber.d(it.size.toString())
         })
         binding.newRecyclerView.adapter = ExploreListAdapter(OnClickListener {
             viewModel.displayComicDetails(it)

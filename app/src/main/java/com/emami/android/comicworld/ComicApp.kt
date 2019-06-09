@@ -1,13 +1,14 @@
 package com.emami.android.comicworld
 
-import android.app.Application
-import com.google.firebase.database.FirebaseDatabase
+import com.emami.android.comicworld.di.DaggerAppComponent
+import dagger.android.support.DaggerApplication
 import timber.log.Timber
 
-class ComicApp : Application() {
+class ComicApp : DaggerApplication() {
+    override fun applicationInjector() =
+        DaggerAppComponent.builder().application(this).build()
     override fun onCreate() {
         super.onCreate()
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
         Timber.plant(Timber.DebugTree())
     }
 }

@@ -4,13 +4,17 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.emami.android.comicworld.data.ComicPreview
 import com.emami.android.comicworld.data.ComicDTO
+import com.emami.android.comicworld.data.ComicPreview
 import com.emami.android.comicworld.data.Repository
+import timber.log.Timber
+import javax.inject.Inject
 
-class ExploreViewModel : ViewModel() {
-    private val repository = Repository()
+class ExploreViewModel @Inject constructor(val repository: Repository) : ViewModel() {
 
+    init {
+        Timber.d("I got created!")
+    }
     val bannerList: LiveData<List<String>>
         get() = repository.banners
 

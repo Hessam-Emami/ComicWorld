@@ -1,47 +1,56 @@
 package com.emami.android.comicworld.data
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import timber.log.Timber
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 
-class Repository {
-    private val database = FirebaseDatabase.getInstance()
+@Singleton
+class Repository @Inject constructor(
 
+    @param:Named("BannerRef")
+    val bannerReference: DatabaseReference,
+
+    @param:Named("ComicRef")
+    val comicReference: DatabaseReference
+) {
     val banners = MutableLiveData<List<String>>()
     val comics = MutableLiveData<List<ComicPreview>>()
     lateinit var lis : List<ComicDTO>
 
     fun refreshData(){
+        Timber.d("I got called")
         loadBanners()
         loadTrendingComics()
     }
 
     private fun loadBanners() {
-        val ref = database.getReference("Banners")
-        Log.d("MainActivity", "test")
-
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+        bannerReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
-                Log.d("MainActivity", p0.message)
+                Timber.d(p0.message)
             }
 
             override fun onDataChange(p0: DataSnapshot) {
                 val list = p0.children.map { it.value.toString() }
-                Log.d("MainActivity", list.size.toString())
+                Timber.d(list.size.toString())
                 banners.value = list
             }
         })
     }
 
     private fun loadTrendingComics(){
-        val ref2 = database.getReference("ComicPreview")
-        ref2.addListenerForSingleValueEvent(object : ValueEventListener {
+        comicReference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
-                Log.d("MainActivity", p0.message)
+                Timber.d(p0.message)
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-               val list= p0.children.map { it.getValue(ComicDTO::class.java) }
+                val list= p0.children.map { it.getValue(ComicDTO::class.java) }
                     .map { it!!.asComic() }
                 lis = p0.children.map { it.getValue(ComicDTO::class.java)!! }
                 comics.value = list
