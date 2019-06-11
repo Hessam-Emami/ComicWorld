@@ -1,6 +1,8 @@
 package com.emami.android.comicworld.data
 
 import androidx.lifecycle.MutableLiveData
+import com.emami.android.comicworld.data.local.ComicDao
+import com.emami.android.comicworld.data.local.ComicDatabase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -8,14 +10,19 @@ import com.google.firebase.database.ValueEventListener
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
+import javax.inject.Singleton
 
+@Singleton
 class Repository @Inject constructor(
 
     @param:Named("BannerRef")
     val bannerReference: DatabaseReference,
 
     @param:Named("ComicRef")
-    val comicReference: DatabaseReference
+    val comicReference: DatabaseReference,
+
+    val databaseService: ComicDao
+
 ) {
     val banners = MutableLiveData<List<String>>()
     val comics = MutableLiveData<List<ComicPreview>>()
@@ -52,6 +59,7 @@ class Repository @Inject constructor(
                     .map { it!!.asComic() }
                 lis = p0.children.map { it.getValue(ComicDTO::class.java)!! }
                 comics.value = list
+//                databaseService.insertAll()
             }
 
         })

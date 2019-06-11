@@ -8,12 +8,8 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityBuilderModule {
 
-    @ContributesAndroidInjector(modules = [])
+    @ContributesAndroidInjector()
     abstract fun contributeMainActivity(): MainActivity
 
-    @TestScope
-    @ContributesAndroidInjector(modules = [ViewModelModule::class,
-        NetworkModule::class])
-    abstract fun contributeExploreFragment(): ExploreFragment
 
 }

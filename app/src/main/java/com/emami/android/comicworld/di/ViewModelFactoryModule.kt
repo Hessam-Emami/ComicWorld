@@ -22,7 +22,3 @@ abstract class ViewModelFactoryModule {
 @Retention(AnnotationRetention.RUNTIME)
 annotation class ViewModelKey(val value: KClass<out ViewModel>)
 
-@Scope
-@MustBeDocumented
-@Retention(AnnotationRetention.RUNTIME)
-annotation class TestScope
