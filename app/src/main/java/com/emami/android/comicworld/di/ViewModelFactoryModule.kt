@@ -6,6 +6,7 @@ import com.emami.android.daggertest.viewModel.ViewModelFactory
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
+import javax.inject.Scope
 import kotlin.reflect.KClass
 
 
@@ -20,3 +21,8 @@ abstract class ViewModelFactoryModule {
 @MapKey
 @Retention(AnnotationRetention.RUNTIME)
 annotation class ViewModelKey(val value: KClass<out ViewModel>)
+
+@Scope
+@MustBeDocumented
+@Retention(AnnotationRetention.RUNTIME)
+annotation class TestScope

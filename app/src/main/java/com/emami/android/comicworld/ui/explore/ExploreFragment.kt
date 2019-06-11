@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.emami.android.comicworld.data.Test
 import com.emami.android.comicworld.databinding.FragmentExploreBinding
 import com.emami.android.comicworld.ui.explore.adapter.ExploreListAdapter
 import com.emami.android.comicworld.ui.explore.adapter.OnClickListener
@@ -20,11 +21,14 @@ class ExploreFragment : DaggerFragment() {
     private lateinit var viewModel: ExploreViewModel
     @Inject
     lateinit var factory: ViewModelProvider.Factory
+    @Inject lateinit var test: Test
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Timber.d("Ramd os "+test.toString())
+
         viewModel = ViewModelProviders.of(this, factory).get(ExploreViewModel::class.java)
         binding = FragmentExploreBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this

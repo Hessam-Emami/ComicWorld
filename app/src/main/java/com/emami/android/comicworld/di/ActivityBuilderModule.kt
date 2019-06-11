@@ -11,7 +11,9 @@ abstract class ActivityBuilderModule {
     @ContributesAndroidInjector(modules = [])
     abstract fun contributeMainActivity(): MainActivity
 
-    @ContributesAndroidInjector(modules = [ViewModelModule::class])
+    @TestScope
+    @ContributesAndroidInjector(modules = [ViewModelModule::class,
+        NetworkModule::class])
     abstract fun contributeExploreFragment(): ExploreFragment
 
 }

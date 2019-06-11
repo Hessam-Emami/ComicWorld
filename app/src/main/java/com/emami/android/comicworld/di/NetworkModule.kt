@@ -4,26 +4,27 @@ import com.google.firebase.database.FirebaseDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
-import javax.inject.Singleton
 
 @Module
 object NetworkModule {
 
     @Provides
     @JvmStatic
-    @Singleton
+    @TestScope
+
     fun provideFirebase() = FirebaseDatabase.getInstance()
 
     @Provides
     @JvmStatic
-    @Singleton
+    @TestScope
+
     @Named("BannerRef")
 
     fun provideBannerRef(db: FirebaseDatabase) = db.getReference("banner")
 
     @Provides
     @JvmStatic
-    @Singleton
+    @TestScope
     @Named("ComicRef")
 
     fun provideComicRef(db: FirebaseDatabase) = db.getReference("comic")

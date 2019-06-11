@@ -8,9 +8,7 @@ import com.google.firebase.database.ValueEventListener
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Named
-import javax.inject.Singleton
 
-@Singleton
 class Repository @Inject constructor(
 
     @param:Named("BannerRef")
