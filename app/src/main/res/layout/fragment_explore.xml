@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.emami.android.comicworld.ui.explore.ExploreViewModel" />
-    </data>
 
 
 <LinearLayout
@@ -87,9 +79,10 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3"
-                    app:recyclerList="@{viewModel.comicList}"
-                    tools:listitem="@layout/recycler_item" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                <!--app:recyclerList="@{viewModel.comicList}"/>-->
+                <!--tools:listitem="@layout/recycler_item" />-->
+
                 <ss.com.bannerslider.Slider
                     android:id="@+id/bannerSlider"
                     android:layout_width="match_parent"
@@ -139,9 +132,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.216"
                     app:layout_constraintStart_toStartOf="@+id/textView"
-                    app:layout_constraintTop_toBottomOf="@+id/textView"
-                    app:recyclerList="@{viewModel.comicList}"
-                    tools:listitem="@layout/recycler_item" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                <!--app:recyclerList="@{viewModel.comicList}"/>-->
+                <!--tools:listitem="@layout/recycler_item" />-->
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

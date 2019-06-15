@@ -25,7 +25,7 @@ class ExploreListAdapter(val onClickListener: OnClickListener) :
 
     class ViewHolder(private val binding: RecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ComicPreview) {
-            binding.comicDTO = item
+//            binding.comicDTO = item
             binding.executePendingBindings()
         }
 

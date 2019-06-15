@@ -11,5 +11,8 @@ abstract class ActivityBuilderModule {
     @ContributesAndroidInjector()
     abstract fun contributeMainActivity(): MainActivity
 
+    @ContributesAndroidInjector()
+    abstract fun contributeExploreFragment(): ExploreFragment
+
 
 }

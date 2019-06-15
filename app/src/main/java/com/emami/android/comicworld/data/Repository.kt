@@ -1,67 +1,24 @@
 package com.emami.android.comicworld.data
 
-import androidx.lifecycle.MutableLiveData
-import com.emami.android.comicworld.data.local.ComicDao
-import com.emami.android.comicworld.data.local.ComicDatabase
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
-import timber.log.Timber
+import com.emami.android.comicworld.data.network.ComicDataProvider
+import com.emami.android.comicworld.data.network.ComicDataState
+import com.emami.android.comicworld.data.network.DataProvider
 import javax.inject.Inject
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
 class Repository @Inject constructor(
 
-    @param:Named("BannerRef")
-    val bannerReference: DatabaseReference,
-
-    @param:Named("ComicRef")
-    val comicReference: DatabaseReference,
-
-    val databaseService: ComicDao
-
-) {
-    val banners = MutableLiveData<List<String>>()
-    val comics = MutableLiveData<List<ComicPreview>>()
-    lateinit var lis : List<ComicDTO>
-
-    fun refreshData(){
-        Timber.d("I got called")
-        loadBanners()
-        loadTrendingComics()
+    val dataProvider: ComicDataProvider
+) : DataProvider<ComicDataState> {
+    override fun requestBannerData(callback: (state: ComicDataState) -> Unit) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private fun loadBanners() {
-        bannerReference.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-                Timber.d(p0.message)
-            }
 
-            override fun onDataChange(p0: DataSnapshot) {
-                val list = p0.children.map { it.value.toString() }
-                Timber.d(list.size.toString())
-                banners.value = list
-            }
-        })
+    override fun requestComicData(callback: (state: ComicDataState) -> Unit) {
+        dataProvider.requestComicData { state -> callback(state) }
     }
 
-    private fun loadTrendingComics(){
-        comicReference.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(p0: DatabaseError) {
-                Timber.d(p0.message)
-            }
 
-            override fun onDataChange(p0: DataSnapshot) {
-                val list= p0.children.map { it.getValue(ComicDTO::class.java) }
-                    .map { it!!.asComic() }
-                lis = p0.children.map { it.getValue(ComicDTO::class.java)!! }
-                comics.value = list
-//                databaseService.insertAll()
-            }
-
-        })
-    }
 }

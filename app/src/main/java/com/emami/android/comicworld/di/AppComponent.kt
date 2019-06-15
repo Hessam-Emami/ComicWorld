@@ -14,7 +14,8 @@ import javax.inject.Singleton
         ViewModelFactoryModule::class,
         ViewModelModule::class,
         NetworkModule::class,
-        DatabaseModule::class]
+        RepositoryModule::class,
+        AppModule::class]
 )
 interface AppComponent : AndroidInjector<ComicApp> {
 
