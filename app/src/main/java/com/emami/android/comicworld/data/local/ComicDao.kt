@@ -12,7 +12,7 @@ interface ComicDao {
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg comics: Comic)
+    suspend fun insertAll(vararg comics: Comic)
 
     @Query("SELECT * FROM comic")
     fun getAll(): LiveData<List<Comic>>
