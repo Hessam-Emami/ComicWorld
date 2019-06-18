@@ -18,6 +18,7 @@ import com.emami.android.comicworld.ui.explore.adapter.ExploreListAdapter
 import com.emami.android.comicworld.ui.explore.adapter.OnClickListener
 import dagger.android.support.DaggerFragment
 import ss.com.bannerslider.Slider
+import timber.log.Timber
 import javax.inject.Inject
 
 class ExploreFragment : DaggerFragment() {
@@ -39,7 +40,7 @@ class ExploreFragment : DaggerFragment() {
         Slider.init(PicassoImageService())
 
 
-        exploreRecyclerAdapter = ExploreListAdapter(OnClickListener { viewModel.displayComicDetails() })
+        exploreRecyclerAdapter = ExploreListAdapter(OnClickListener { viewModel.displayComicDetails(it) })
         binding.newRecyclerView.layoutManager = LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL,false)
         binding.secRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
         binding.newRecyclerView.adapter = exploreRecyclerAdapter
@@ -65,6 +66,7 @@ class ExploreFragment : DaggerFragment() {
 
         viewModel.navigateToSelectedComic.observe(this, Observer {
             if (it != null) {
+                Timber.d("Item to be passed into Pager: $it")
                 findNavController().navigate(ExploreFragmentDirections.actionExploreFragmentToPagerFragment(it))
                 viewModel.displayComicDetailsCompleted()
             }
@@ -76,11 +78,15 @@ class ExploreFragment : DaggerFragment() {
     private fun showComicData(data: Any?) {
         binding.progressBar.visibility = View.GONE
         exploreRecyclerAdapter.submitList(data as MutableList<Comic>?)
+        Timber.d("Recieved Comic Data Size: ${data?.size}")
+
     }
 
     private fun showBannerData(data: Any?) {
         binding.bannerSlider.setAdapter(BannerSliderAdapter(data as List<String>))
         binding.progressBar.visibility = View.GONE
+        Timber.d("Recieved Banner Data Size: ${data?.size}")
+
     }
 
     private fun showError(message: String) {

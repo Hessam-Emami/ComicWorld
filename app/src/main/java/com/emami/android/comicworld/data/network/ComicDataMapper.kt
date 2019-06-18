@@ -13,3 +13,8 @@ class ComicDataMapper : DataMapper<DataSnapshot, List<Comic>> {
 
 
 }
+
+interface DataMapper<S, R> {
+    fun map(source: S): R
+
+}

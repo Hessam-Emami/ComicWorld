@@ -25,14 +25,14 @@ class ComicDataProvider constructor(
         Timber.d("Loading")
         val eventListener = object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
-                Timber.d("Error " + p0.message)
+                Timber.d("Error %s", p0.message)
                 callback(ComicDataState.Error(p0.message))
             }
 
             override fun onDataChange(p0: DataSnapshot) {
                 val result = comicDataMapper.map(p0)
                 callback(ComicDataState.Success(result))
-                Timber.d("SUCCESS: " + result?.toString())
+                Timber.d("SUCCESS: %s", result.toString())
             }
         }
         comicReference.addListenerForSingleValueEvent(eventListener)
@@ -46,14 +46,14 @@ class ComicDataProvider constructor(
         }
         val eventListener = object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
-                Timber.d("Error " + p0.message)
+                Timber.d("Error %s", p0.message)
                 callback(ComicDataState.Error(p0.message))
             }
 
             override fun onDataChange(p0: DataSnapshot) {
                 val result = p0.children.map { it.value.toString() }
                 callback(ComicDataState.Success(result))
-                Timber.d("SUCCESS: " + result?.toString())
+                Timber.d("SUCCESS: %s", result.toString())
 
             }
         }
@@ -62,4 +62,10 @@ class ComicDataProvider constructor(
     }
 
 
+}
+
+
+interface DataProvider<T> {
+    fun requestComicData(callback: (state: ComicDataState) -> Unit)
+    fun requestBannerData(callback: (state: ComicDataState) -> Unit)
 }
