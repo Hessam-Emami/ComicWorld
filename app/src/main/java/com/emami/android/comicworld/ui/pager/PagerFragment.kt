@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.emami.android.comicworld.data.ComicDTO
+import com.emami.android.comicworld.data.Comic
 import com.emami.android.comicworld.databinding.FragmentPagerBinding
 
 
 class PagerFragment : Fragment() {
 
-    lateinit var comicDTO: ComicDTO
+    lateinit var comic: Comic
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -20,13 +20,13 @@ class PagerFragment : Fragment() {
         val binding = FragmentPagerBinding.inflate(inflater, container , false)
         // Inflate the layout for this fragment
 
-        comicDTO = PagerFragmentArgs.fromBundle(arguments!!).comicDTO
-        binding.comicDTO = comicDTO
-        binding.comicViewPager.adapter = ComicFragmentPager(
-            comicDTO,
-            childFragmentManager,
-            binding.comicTabLayout.childCount
-        )
+        comic = PagerFragmentArgs.fromBundle(arguments!!).comic
+//        binding.comicDTO = comicDTO
+//        binding.comicViewPager.adapter = ComicFragmentPager(
+//            comicDTO,
+//            childFragmentManager,
+//            binding.comicTabLayout.childCount
+//        )
         binding.comicTabLayout.setupWithViewPager(binding.comicViewPager)
         return binding.root
     }

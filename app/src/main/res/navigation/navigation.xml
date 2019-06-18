@@ -51,7 +51,7 @@
         android:label="fragment_pager"
         tools:layout="@layout/fragment_pager" >
         <argument
-            android:name="comicDTO"
-            app:argType="com.emami.android.comicworld.data.ComicDTO" />
+            android:name="comic"
+            app:argType="com.emami.android.comicworld.data.Comic" />
     </fragment>
 </navigation>

@@ -3,7 +3,7 @@ package com.emami.android.comicworld.ui.explore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.emami.android.comicworld.data.ComicDTO
+import com.emami.android.comicworld.data.Comic
 import com.emami.android.comicworld.data.Repository
 import com.emami.android.comicworld.data.network.ComicDataState
 import timber.log.Timber
@@ -25,8 +25,8 @@ class ExploreViewModel @Inject constructor(val repository: Repository) : ViewMod
     val bannerViewState: LiveData<DataViewState>
         get() = _bannerViewState
 
-    private val _navigateToSelectedComic = MutableLiveData<ComicDTO>()
-    val navigateToSelectedComicDTO: LiveData<ComicDTO>
+    private val _navigateToSelectedComic = MutableLiveData<Comic>()
+    val navigateToSelectedComic: LiveData<Comic>
         get() = _navigateToSelectedComic
 
 
@@ -47,12 +47,9 @@ class ExploreViewModel @Inject constructor(val repository: Repository) : ViewMod
             }
         }
     }
-//     fun displayComicDetails(comicPreview: ComicPreview){
-////         val name = comicPreview.name
-////         val com = repository.lis.find { it.name == name }
-////         Log.d("COMIC", com.toString())
-////        _navigateToSelectedComic.value = com!!
-//    }
+     fun displayComicDetails(comic: Comic){
+        _navigateToSelectedComic.value = comic
+    }
 
      fun displayComicDetailsCompleted(){
         _navigateToSelectedComic.value = null

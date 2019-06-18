@@ -8,13 +8,15 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.emami.android.comicworld.data.Comic
 import com.emami.android.comicworld.databinding.FragmentExploreBinding
 import com.emami.android.comicworld.service.PicassoImageService
 import com.emami.android.comicworld.ui.explore.adapter.BannerSliderAdapter
 import com.emami.android.comicworld.ui.explore.adapter.ExploreListAdapter
 import com.emami.android.comicworld.ui.explore.adapter.OnClickListener
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_explore.*
 import ss.com.bannerslider.Slider
 import javax.inject.Inject
 
@@ -34,7 +36,13 @@ class ExploreFragment : DaggerFragment() {
         binding = FragmentExploreBinding.inflate(inflater, container, false)
 
         Slider.init(PicassoImageService())
-        exploreRecyclerAdapter = ExploreListAdapter(OnClickListener {  })
+
+
+        exploreRecyclerAdapter = ExploreListAdapter(OnClickListener { viewModel.displayComicDetailsCompleted() })
+        binding.newRecyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.secRecyclerView.layoutManager = LinearLayoutManager(this.context)
+        binding.newRecyclerView.adapter = exploreRecyclerAdapter
+        binding.secRecyclerView.adapter = exploreRecyclerAdapter
 
         viewModel.comicViewState.observe(this, Observer {
             when(it){
@@ -54,32 +62,24 @@ class ExploreFragment : DaggerFragment() {
 
 
 
-//        binding.newRecyclerView.adapter = ExploreListAdapter(OnClickListener {
-//            viewModel.displayComicDetails(it)
-//        })
-//        binding.secRecyclerView.adapter = ExploreListAdapter(OnClickListener {
-//            viewModel.displayComicDetails(it)
-//        })
-//
-//        viewModel.navigateToSelectedComicDTO.observe(this, Observer {
-//            if (it != null) {
-//                findNavController().navigate(ExploreFragmentDirections.actionExploreFragmentToPagerFragment(it))
-//                viewModel.displayComicDetailsCompleted()
-//            }
-//            })
+        viewModel.navigateToSelectedComic.observe(this, Observer {
+            if (it != null) {
+                findNavController().navigate(ExploreFragmentDirections.actionExploreFragmentToPagerFragment(it))
+                viewModel.displayComicDetailsCompleted()
+            }
+            })
 
         return binding.root
     }
 
     private fun showComicData(data: Any?) {
         binding.progressBar.visibility = View.GONE
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        exploreRecyclerAdapter.submitList(data as MutableList<Comic>?)
     }
 
     private fun showBannerData(data: Any?) {
         binding.bannerSlider.setAdapter(BannerSliderAdapter(data as List<String>))
         binding.progressBar.visibility = View.GONE
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private fun showError(message: String) {
