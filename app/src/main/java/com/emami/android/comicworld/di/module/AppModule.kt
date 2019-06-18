@@ -7,7 +7,6 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-//TODO SIMPLIFY DEPENDENCIES!!!!AND INJECTIONS!!!!
 @Module
 object AppModule {
 
