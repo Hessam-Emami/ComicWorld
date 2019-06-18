@@ -25,11 +25,9 @@ data class Comic(
 fun ComicDTO.asDBComic():Comic{ return Comic(this.name!!,this.image!!,
     this.category!!,this.year!!,this.description!!,this.chapters!!) }
 
-@Parcelize
-data class ComicPreview(val name:String, val imgSource: String) : Parcelable
 
 @Parcelize
-data class Chapter(val links: List<String>,
-                   val name: String) : Parcelable
+data class Chapter(val links: List<String>?,
+                   val name: String?) : Parcelable
 
 

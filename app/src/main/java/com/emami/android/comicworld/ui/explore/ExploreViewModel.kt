@@ -11,11 +11,6 @@ import javax.inject.Inject
 
 class ExploreViewModel @Inject constructor(val repository: Repository) : ViewModel() {
 
-    init {
-        Timber.d("I got created!")
-        Timber.d("Repo Id: $repository")
-        load()
-    }
 
     private val _comicViewState = MutableLiveData<DataViewState>()
     val comicViewState: LiveData<DataViewState>
@@ -29,6 +24,12 @@ class ExploreViewModel @Inject constructor(val repository: Repository) : ViewMod
     val navigateToSelectedComic: LiveData<Comic>
         get() = _navigateToSelectedComic
 
+
+    init {
+        Timber.d("I got created!")
+        Timber.d("Repo Id: $repository")
+        load()
+    }
 
     private fun load() {
         repository.requestComicData { state ->

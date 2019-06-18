@@ -33,6 +33,7 @@ class ExploreFragment : DaggerFragment() {
     ): View? {
 
         binding = FragmentExploreBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
         viewModel = ViewModelProviders.of(this, factory).get(ExploreViewModel::class.java)
 
         Slider.init(PicassoImageService())
@@ -43,22 +44,22 @@ class ExploreFragment : DaggerFragment() {
         binding.secRecyclerView.layoutManager = LinearLayoutManager(this.context)
         binding.newRecyclerView.adapter = exploreRecyclerAdapter
         binding.secRecyclerView.adapter = exploreRecyclerAdapter
-//
-//        viewModel.comicViewState.observe(this, Observer {
-//            when(it){
-//                is DataViewState.InProgress -> showLoading()
-//                is DataViewState.ShowError -> showError(it.message)
-//                is DataViewState.ShowComics<*> -> showComicData(it.data)
-//            }
-//        })
-//
-//        viewModel.bannerViewState.observe(this, Observer {
-//            when(it){
-//                is DataViewState.InProgress -> showLoading()
-//                is DataViewState.ShowError -> showError(it.message)
-//                is DataViewState.ShowComics<*> -> showBannerData(it.data)
-//            }
-//        })
+
+        viewModel.comicViewState.observe(this, Observer {
+            when(it){
+                is DataViewState.InProgress -> showLoading()
+                is DataViewState.ShowError -> showError(it.message)
+                is DataViewState.ShowComics<*> -> showComicData(it.data)
+            }
+        })
+
+        viewModel.bannerViewState.observe(this, Observer {
+            when(it){
+                is DataViewState.InProgress -> showLoading()
+                is DataViewState.ShowError -> showError(it.message)
+                is DataViewState.ShowComics<*> -> showBannerData(it.data)
+            }
+        })
 
 
 

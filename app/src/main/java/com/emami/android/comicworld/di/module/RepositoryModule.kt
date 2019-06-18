@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
+import javax.inject.Singleton
 
 @Module
 object RepositoryModule {
@@ -17,10 +18,12 @@ object RepositoryModule {
 
     @JvmStatic
     @Provides
+    @Singleton
     fun provideDataMapper(): DataMapper<DataSnapshot, List<Comic>> = ComicDataMapper()
 
     @JvmStatic
     @Provides
+    @Singleton
     fun provideComicDataProvider(
         connectivityChecker: ConnectivityChecker,
         comicDataMapper: DataMapper<DataSnapshot, List<Comic>>,
