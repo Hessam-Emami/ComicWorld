@@ -39,9 +39,9 @@ class ExploreFragment : DaggerFragment() {
         Slider.init(PicassoImageService())
 
 
-        exploreRecyclerAdapter = ExploreListAdapter(OnClickListener { viewModel.displayComicDetailsCompleted() })
-        binding.newRecyclerView.layoutManager = LinearLayoutManager(this.context)
-        binding.secRecyclerView.layoutManager = LinearLayoutManager(this.context)
+        exploreRecyclerAdapter = ExploreListAdapter(OnClickListener { viewModel.displayComicDetails() })
+        binding.newRecyclerView.layoutManager = LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL,false)
+        binding.secRecyclerView.layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
         binding.newRecyclerView.adapter = exploreRecyclerAdapter
         binding.secRecyclerView.adapter = exploreRecyclerAdapter
 
