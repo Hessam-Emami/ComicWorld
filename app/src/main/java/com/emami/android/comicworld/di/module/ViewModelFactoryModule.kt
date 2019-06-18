@@ -1,4 +1,4 @@
-package com.emami.android.comicworld.di
+package com.emami.android.comicworld.di.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

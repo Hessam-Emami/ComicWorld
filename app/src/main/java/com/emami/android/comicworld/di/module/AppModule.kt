@@ -1,4 +1,4 @@
-package com.emami.android.comicworld.di
+package com.emami.android.comicworld.di.module
 
 import android.content.Context
 import android.net.ConnectivityManager

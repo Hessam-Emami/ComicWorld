@@ -6,11 +6,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import timber.log.Timber
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class ComicDataProvider @Inject constructor(
+class ComicDataProvider constructor(
     val connectivityChecker: ConnectivityChecker,
     val comicDataMapper: ComicDataMapper,
     val bannerReference: DatabaseReference,
@@ -21,7 +18,7 @@ class ComicDataProvider @Inject constructor(
     override fun requestComicData(callback: (state: ComicDataState) -> Unit) {
         if (!connectivityChecker.isConnected) {
             callback(ComicDataState.Error("No Network Connectivity.."))
-            Timber.d("No Network!!!")
+            Timber.d("No Network Connectivity..")
             return
         }
         callback(ComicDataState.Loading)
@@ -49,13 +46,15 @@ class ComicDataProvider @Inject constructor(
         }
         val eventListener = object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
-                Timber.d(p0.message)
+                Timber.d("Error " + p0.message)
                 callback(ComicDataState.Error(p0.message))
             }
 
             override fun onDataChange(p0: DataSnapshot) {
                 val result = p0.children.map { it.value.toString() }
                 callback(ComicDataState.Success(result))
+                Timber.d("SUCCESS: " + result?.toString())
+
             }
         }
         callback(ComicDataState.Loading)

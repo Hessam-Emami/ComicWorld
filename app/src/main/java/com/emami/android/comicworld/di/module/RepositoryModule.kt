@@ -1,4 +1,4 @@
-package com.emami.android.comicworld.di
+package com.emami.android.comicworld.di.module
 
 import com.emami.android.comicworld.data.Comic
 import com.emami.android.comicworld.data.network.ComicDataMapper
@@ -10,7 +10,6 @@ import com.google.firebase.database.DatabaseReference
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
-import javax.inject.Singleton
 
 @Module
 object RepositoryModule {
@@ -18,16 +17,15 @@ object RepositoryModule {
 
     @JvmStatic
     @Provides
-    @Singleton
     fun provideDataMapper(): DataMapper<DataSnapshot, List<Comic>> = ComicDataMapper()
 
     @JvmStatic
     @Provides
-    @Singleton
     fun provideComicDataProvider(
         connectivityChecker: ConnectivityChecker,
-        comicDataMapper: ComicDataMapper,
+        comicDataMapper: DataMapper<DataSnapshot, List<Comic>>,
         @Named("BannerRef") bannerReference: DatabaseReference,
         @Named("ComicRef") comicReference: DatabaseReference
-    ): ComicDataProvider = ComicDataProvider(connectivityChecker, comicDataMapper, bannerReference, comicReference)
+    ): ComicDataProvider = ComicDataProvider(connectivityChecker,
+        comicDataMapper as ComicDataMapper, bannerReference, comicReference)
 }

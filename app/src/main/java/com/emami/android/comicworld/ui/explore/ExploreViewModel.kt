@@ -3,9 +3,7 @@ package com.emami.android.comicworld.ui.explore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.emami.android.comicworld.data.Comic
 import com.emami.android.comicworld.data.ComicDTO
-import com.emami.android.comicworld.data.ComicPreview
 import com.emami.android.comicworld.data.Repository
 import com.emami.android.comicworld.data.network.ComicDataState
 import timber.log.Timber
@@ -15,50 +13,59 @@ class ExploreViewModel @Inject constructor(val repository: Repository) : ViewMod
 
     init {
         Timber.d("I got created!")
+        Timber.d("Repo Id: $repository")
+        load()
     }
 
-    private val _bannerList = MutableLiveData<List<String>>()
-    val bannerList: LiveData<List<String>>
-        get() = _bannerList
-
-    private val _comicViewState = MutableLiveData<ComicViewState>()
-    val comicList: LiveData<ComicViewState>
+    private val _comicViewState = MutableLiveData<DataViewState>()
+    val comicViewState: LiveData<DataViewState>
         get() = _comicViewState
+
+    private val _bannerViewState = MutableLiveData<DataViewState>()
+    val bannerViewState: LiveData<DataViewState>
+        get() = _bannerViewState
 
     private val _navigateToSelectedComic = MutableLiveData<ComicDTO>()
     val navigateToSelectedComicDTO: LiveData<ComicDTO>
         get() = _navigateToSelectedComic
 
-    init {
-        test()
-    }
 
-    fun test() {
+    private fun load() {
         repository.requestComicData { state ->
             _comicViewState.value = when (state) {
-                ComicDataState.Loading -> ComicViewState.InProgress
-                is ComicDataState.Error -> ComicViewState.ShowError(state.message)
-                is ComicDataState.Success<*> -> ComicViewState.ShowComics(state.data as List<Comic>)
+                ComicDataState.Loading -> DataViewState.InProgress
+                is ComicDataState.Error -> DataViewState.ShowError(state.message)
+                is ComicDataState.Success<*> -> DataViewState.ShowComics(state.data)
+            }
+        }
+
+        repository.requestBannerData { state ->
+            _bannerViewState.value = when (state) {
+                ComicDataState.Loading -> DataViewState.InProgress
+                is ComicDataState.Error -> DataViewState.ShowError(state.message)
+                is ComicDataState.Success<*> -> DataViewState.ShowComics(state.data)
             }
         }
     }
-     fun displayComicDetails(comicPreview: ComicPreview){
-//         val name = comicPreview.name
-//         val com = repository.lis.find { it.name == name }
-//         Log.d("COMIC", com.toString())
-//        _navigateToSelectedComic.value = com!!
-    }
+//     fun displayComicDetails(comicPreview: ComicPreview){
+////         val name = comicPreview.name
+////         val com = repository.lis.find { it.name == name }
+////         Log.d("COMIC", com.toString())
+////        _navigateToSelectedComic.value = com!!
+//    }
 
      fun displayComicDetailsCompleted(){
         _navigateToSelectedComic.value = null
     }
+
+
 }
 
-sealed class ComicViewState {
+sealed class DataViewState {
 
-    object InProgress : ComicViewState()
+    object InProgress : DataViewState()
 
-    class ShowComics(val comics: List<Comic>) : ComicViewState()
+    class ShowComics<T>(val data: T) : DataViewState()
 
-    class ShowError(val message: String) : ComicViewState()
+    class ShowError(val message: String) : DataViewState()
 }

@@ -1,4 +1,4 @@
-package com.emami.android.comicworld.di
+package com.emami.android.comicworld.di.module
 
 import com.emami.android.comicworld.ui.MainActivity
 import com.emami.android.comicworld.ui.explore.ExploreFragment
@@ -7,6 +7,7 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class ActivityBuilderModule {
+
 
     @ContributesAndroidInjector()
     abstract fun contributeMainActivity(): MainActivity

@@ -7,6 +7,7 @@ import timber.log.Timber
 class ComicApp : DaggerApplication() {
     override fun applicationInjector() =
         DaggerAppComponent.builder().application(this).build()
+
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())

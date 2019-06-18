@@ -1,6 +1,7 @@
-package com.emami.android.comicworld.di
+package com.emami.android.comicworld.di.module
 
 import com.google.firebase.database.FirebaseDatabase
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -8,6 +9,10 @@ import javax.inject.Singleton
 
 @Module
 object NetworkModule {
+
+    @Provides
+    @JvmStatic
+    fun provideGson() = Gson()
 
     @Provides
     @JvmStatic

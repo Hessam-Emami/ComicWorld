@@ -1,6 +1,7 @@
 package com.emami.android.comicworld.di
 
 import com.emami.android.comicworld.ComicApp
+import com.emami.android.comicworld.di.module.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
